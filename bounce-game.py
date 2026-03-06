@@ -54,7 +54,7 @@ while True:
     screen.fill((0,0,0))
 
     pygame.draw.circle(screen,(255,0,0),(ball_x,ball_y),10)
-    pygame.draw.rect(screen,(255,255,255),(paddle_x,paddle_y,paddle_width,paddle_height))
+    pygame.draw.rect(screen,(139,69,19),(paddle_x,paddle_y,paddle_width,paddle_height))
 
     pygame.display.update()
 
