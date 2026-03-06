@@ -5,20 +5,6 @@ import sys
 import math
 
 pygame.init()
-import math
-
-def draw_spiky_ball(surface, color, x, y, radius, spikes):
-    points = []
-    for i in range(spikes * 2):
-        angle = i * math.pi / spikes
-        if i % 2 == 0:
-            r = radius       # outer spike
-        else:
-            r = radius // 2  # inner spike
-        px = x + int(math.cos(angle) * r)
-        py = y + int(math.sin(angle) * r)
-        points.append((px, py))
-    pygame.draw.polygon(surface, color, points)
 
 WIDTH = 600
 HEIGHT = 400
@@ -72,7 +58,7 @@ while True:
 
 
 
-    draw_spiky_ball(screen, (255,0,0), ball_x, ball_y, 10, 8)
+    pygame.draw.circle(screen, (255, 0, 0), (int(ball_x), int(ball_y)), 10)
     pygame.draw.rect(screen,(139,69,19),(paddle_x,paddle_y,paddle_width,paddle_height))
 
     pygame.display.update()
