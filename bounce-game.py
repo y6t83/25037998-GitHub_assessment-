@@ -1,12 +1,22 @@
 # I acknowledge the use of ChatGPT (OpenAI) to help generate this code.
 
-# I acknowledge the use of ChatGPT (OpenAI) to help generate this code.
+
 
 import pygame
 import sys
 import math
 
 pygame.init()
+
+# Fireball colors
+fire_colors = [
+    (255, 0, 0),    # red
+    (255, 140, 0),  # orange
+    (255, 215, 0)   # yellow
+]
+
+# Water platform color
+water_color = (0, 191, 255)  # deep sky blue
 
 WIDTH = 600
 HEIGHT = 400
@@ -26,6 +36,21 @@ paddle_height = 10
 paddle_speed = 7
 
 clock = pygame.time.Clock()
+
+def draw_fireball(surface, x, y, radius, spikes):
+    points = []
+    for i in range(spikes * 2):
+        angle = i * math.pi / spikes
+        r = radius if i % 2 == 0 else radius // 2
+        px = x + int(math.cos(angle) * r)
+        py = y + int(math.sin(angle) * r)
+        points.append((px, py))
+    # Draw layered fire colors from outer to inner
+    pygame.draw.polygon(surface, fire_colors[0], points)  # outer red
+    inner_points = [(x + int((px - x) * 0.7), y + int((py - y) * 0.7)) for px, py in points]
+    pygame.draw.polygon(surface, fire_colors[1], inner_points)  # middle orange
+    inner_points2 = [(x + int((px - x) * 0.4), y + int((py - y) * 0.4)) for px, py in points]
+    pygame.draw.polygon(surface, fire_colors[2], inner_points2)  # inner yellow
 
 while True:
 
@@ -60,8 +85,8 @@ while True:
 
 
 
-    pygame.draw.circle(screen, (192,192,192), (int(ball_x), int(ball_y)), 10)
-    pygame.draw.rect(screen,(139,69,19),(paddle_x,paddle_y,paddle_width,paddle_height))
+    draw_fireball(screen,ball_x,ball_y,10,8)
+    pygame.draw.rect(screen, water_color, (paddle_x, paddle_y, paddle_width, paddle_height))
 
     pygame.display.update()
 
