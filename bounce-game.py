@@ -79,9 +79,11 @@ while True:
     if ball_y >= paddle_y and paddle_x < ball_x < paddle_x + paddle_width:
         ball_speed_y *= -1
 
-    screen.fill((0,0,0))
+    screen.fill((160, 82, 45))  # brown background)
 
-    
+    for y in range(0, HEIGHT, 40):
+      pygame.draw.rect(screen, (139, 69, 19), (0, y, WIDTH, 40))
+      pygame.draw.line(screen, (110, 50, 15), (0, y), (WIDTH, y), 2)
 
 
 
